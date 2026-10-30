@@ -1,11 +1,20 @@
-import { Screen } from "@/components/screen";
+import { Suspense } from "react";
+
+import { TransactionsPanel } from "@/components/transactions-panel";
 
 export default function TransactionsPage() {
   return (
-    <Screen
-      title="Transactions"
-      phase="Phase 3"
-      summary="Income, expenses, card purchases, card payments, and transfers will be recorded here as separate transaction types."
-    />
+    <section className="flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-2xl font-semibold tracking-tight">Transactions</h1>
+        <p className="max-w-2xl text-zinc-700 dark:text-zinc-300">
+          Record money that arrived, money that left, or money that moved between
+          balances. Card purchases wait until the card screen.
+        </p>
+      </div>
+      <Suspense fallback={<p className="text-sm text-zinc-500">Loading transactions…</p>}>
+        <TransactionsPanel />
+      </Suspense>
+    </section>
   );
 }
